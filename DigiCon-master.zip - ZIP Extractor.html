@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<!-- saved from url=(0025)https://zipextractor.app/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ZIP Extractor is a free app for creating and opening ZIP files on PC, Mac, Android, iPhone, and Google Drive.">
+    <meta name="keywords" content="ZIP, RAR, unzip, unrar, zip opener, zip extractor, 7z, tar, bzip, create, zip creator, rar opener, extract, compress, decompress, password, view, open, free, app, mac, PC, android, iphone, zip, google, drive, cloud">
+    <meta name="google" content="notranslate">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>DigiCon-master.zip - ZIP Extractor</title>
+
+    <link rel="icon" href="https://zipextractor.app/favicon.png" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="./DigiCon-master.zip - ZIP Extractor_files/styles3-67-min.css">
+
+    <link href="./DigiCon-master.zip - ZIP Extractor_files/css(1)" rel="stylesheet">
+
+    <link href="./DigiCon-master.zip - ZIP Extractor_files/css(2)" rel="stylesheet">
+
+    <style>
+      @font-face {
+        font-family: 'Material Icons';
+        font-style: normal;
+        font-weight: 400;
+        src: url(https://fonts.gstatic.com/s/materialicons/v50/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2');
+      }
+
+      html, body {
+        font-family: 'Roboto',sans-serif;
+        font-size: 14px;
+        margin: 0;
+        width: 100%;
+        min-height: 100%;
+        height: 100%;
+        line-height: 150%;
+        font-weight: 400;
+        /* background-color: #fff; */
+        background-color: #f9f9f9;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow: hidden;
+        /* display: flex; */
+        justify-content: center;
+      }
+
+      #adHeading {
+        display: flex;
+        font-size: 12px;
+        width: 100%;
+        color: #5f6368;
+        height: 16px;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: 1.0px;
+        margin-bottom: 4px;
+      }
+      @media ( max-width: 639px ) { #adHeading { visibility: hidden; } }
+
+      .topBanner {
+        display: block;
+        min-width: 300px;
+        /* max-width: 1000px; /
+        /* width: 970px; */
+        width: 100%;
+        min-height: 90px;
+        max-height: 90px;
+        height: 90px;
+        margin-bottom: 28px;
+        text-align: center;
+      }
+      /* @media ( max-height: 659px ) { .topBanner { margin-bottom: 24px; } } */
+      /* Consider allowing up to 100px on mobile, trim bottom by 4 and top by 6 */
+      /* @media ( max-width: 639px ) { .topBanner { max-height: 100px; height: 100px; margin-bottom: 24px; margin-left: 0px; margin-right: 0px;} } */
+      /* NEW: Hide mobile banner on mobile. */
+      @media ( max-width: 639px ) { .topBanner { display: none; } }
+
+      .topBannerIns {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .material-icons {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        /* font-size: 24px; */
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+        -moz-font-feature-settings: 'liga';
+        -moz-osx-font-smoothing: grayscale;
+      }
+    </style>
+
+    <script src="./DigiCon-master.zip - ZIP Extractor_files/osd.js.download"></script><script src="./DigiCon-master.zip - ZIP Extractor_files/f(5).txt"></script><script src="./DigiCon-master.zip - ZIP Extractor_files/f(6).txt" id="google_shimpl"></script><script type="text/javascript" async="" src="./DigiCon-master.zip - ZIP Extractor_files/analytics.js.download"></script><script src="./DigiCon-master.zip - ZIP Extractor_files/cb=gapi.loaded_0" async=""></script><script>
+      var ze = {};
+      ze.VERSION = '3.67';
+      window.console.log('===== LOADING ZIP EXTRACTOR ' + ze.VERSION + ' =====');
+
+      var APP_CONFIG = {
+        'clientId': '824911851129-6d64j0e08s86ih74l0lu386tqqfv71t9.apps.googleusercontent.com',
+        'appId': '824911851129',
+        'scopes': 'openid email profile https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.install',
+        'apiKey': 'AIzaSyBW4IYnFZLyPFFKtZ2qWJYTlURyyE-Vt_4'
+      };
+
+      var MAINAPP;
+
+      var firstAuthIsPending = true;
+      var firstAuthSuccessful = false;
+
+      var uiUpdatedAfterDomReady = false;
+
+      var CURRENT_AUTH_USER = 0;
+      var CURRENT_USER_INFO = null;
+
+      var CLAIM = null;
+      var ID_TOKEN = null;
+      var ACCESS_TOKEN = null;
+
+      var htmlBodyLoaded = false;
+      var tagManagerLoaded = false;
+
+      var queuedEvents = [];
+
+      var isForDirectNew = isUrlParamKeyPresent('new');
+
+      var STATE = {};
+      if (!isForDirectNew) { // Preserve /?new
+        STATE = parseUrlState();
+        clearUrlState();
+      }
+
+      function getReferringSource() {
+        var referrer = (document && document.referrer) ? document.referrer.toLowerCase() : '';
+        if (referrer.indexOf('drive.google.com') != -1) {
+          return 'drive';
+        } else if (referrer.indexOf('mail.google.com') != -1) {
+          return 'gmail';
+        } else {
+          return 'general';
+        }
+      }
+
+      function execLater(fn, opt_callback, opt_delayMillis) {
+        window.setTimeout(function () {
+          fn();
+          if (opt_callback) {
+            opt_callback();
+          }
+        }, opt_delayMillis || 0);
+      };
+
+      function updateUiAfterDomReady() {
+        // Idempotent.
+        if (uiUpdatedAfterDomReady) {
+          return;
+        }
+        uiUpdatedAfterDomReady = true;
+
+        updateUiForDevice();
+
+        var hasFileId = (getFileId() != null);
+        var source = hasFileId ? getReferringSource() : 'general';
+
+        if (hasFileId && (source != 'gmail')) {
+          source = 'drive'; // Fallback to allow Auth flow.
+        }
+        var isForDrive = (source == 'drive');
+        var isForGmail = (source == 'gmail');
+        var isForGeneral = (! (isForDrive || isForGmail));
+
+        document.getElementById('startPageIconImgDrive').style.visibility = '';
+        showEl(document.getElementById('startPageIconImgGeneral'), isForGeneral);
+        showEl(document.getElementById('startPageIconImgGmail'), isForGmail);
+        showEl(document.getElementById('startPageIconImgDrive'), isForDrive);
+
+        showEl(document.getElementById('startPageGeneralDetails'), isForGeneral);
+        showEl(document.getElementById('startPageGmailDetails'), isForGmail);
+        showEl(document.getElementById('startPageDriveDetails'), isForDrive);
+        document.getElementById('startPageDriveDetails').style.visibility = '';
+
+        showEl(document.getElementById('startPagePrompt'), true);
+        document.getElementById('startPagePrompt').style.visibility = '';
+      }
+
+      function showEl(el, show) {
+        el.style.display = show ? '' : 'none';
+      }
+
+      function gtag() {
+        if (tagManagerLoaded) {
+          window.dataLayer.push(arguments);
+        } else {
+          queuedEvents.push(arguments);
+        }
+      }
+
+      function logImpression(action, opt_category, opt_label, opt_value, opt_nonInteractive, opt_sendAsBeacon) {
+        var metadata = {};
+        if (opt_category != null) {
+          metadata['event_category'] = opt_category;
+          if (opt_category === 'app_load') {
+            if (opt_nonInteractive == null) {
+            }
+          }
+        }
+        if (opt_label != null) {
+          metadata['event_label'] = opt_label;
+        }
+        if (opt_value != null) {
+          metadata['value'] = Number(opt_value);
+        }
+
+        if (opt_sendAsBeacon == true) {
+          metadata['transport_type'] = 'beacon';
+        }
+
+        if (opt_nonInteractive == true) {
+          metadata['non_interaction'] = true;
+        }
+
+        if (Object.keys(metadata).length == 0) {
+          gtag('event', action);
+        } else {
+          gtag('event', action, metadata);
+        }
+      }
+
+      function gtagManagerLoaded() {
+        try {
+          tagManagerLoaded = true;
+          window.dataLayer = window.dataLayer || [];
+          gtag('js', new Date());
+          gtag('config', 'UA-47214311-1');
+
+          // Process any queued events.
+          var numQueuedEvents = queuedEvents.length;
+          for (var i = 0; i < numQueuedEvents; i++) {
+            gtag(queuedEvents[i]);
+          }
+
+          // Clear previously queued events
+          queuedEvents = [];
+        } catch (err) {
+          logImpression('gtag_manager_postload_error', 'app_load', err);
+        }
+      }
+
+      function clearUrlState() {
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+
+      function onHtmlBodyLoaded() {
+        // Removing logging to reduce load on Google Analytics.
+        // logImpression('htmlBodyLoaded', 'app_load');
+        htmlBodyLoaded = true;
+
+        // Calling as a fallback. Idempotent.
+        updateUiAfterDomReady();
+
+        try {
+          if (MAINAPP) {
+            MAINAPP.initAfterHtmlReady(getFileId());
+          }
+        } catch (err) {
+          logImpression('main_app_htmlbodyloaded_error', 'app_load', err);
+          //throw(err);
+        }
+      }
+
+      function onMainAppScriptLoaded() {
+        logImpression('main_app_script_loaded', 'app_load');
+
+        try {
+          MAINAPP = new ze.App();
+          if (htmlBodyLoaded) {
+            MAINAPP.initAfterHtmlReady(getFileId());
+          }
+        } catch (err) {
+          logImpression('main_app_bootstrap_error', 'app_load', err);
+          //throw(err);
+        }
+      }
+
+      function isForDirectNewFlow() {
+        return isForDirectNew;
+      }
+
+      function isForCreateNew() {
+        return STATE.action == 'create' && !getFileId();
+      }
+
+      function isForOpen() {
+        return STATE.action == 'open' && !!getFileId();
+      }
+
+      function getStateUserId() {
+        return STATE.userId;
+      }
+
+      function getParentFolderId() {
+        // Contextual-create Folder ID for 'create new' scenario.
+        return STATE.folderId;
+      }
+
+      function getFileId() {
+        var ids = STATE.ids;
+        if (!ids) {
+          return null;
+        }
+        return (ids.length && ids.length > 0) ? ids[0] : null;
+      }
+
+      function clearState() {
+        STATE = {};
+      }
+
+      function parseUrlState() {
+        var parsedState = null;
+        try {
+          var rawState = getUrlParam('state');
+          if (!rawState) {
+            return {};
+          }
+          parsedState = JSON.parse(rawState);
+        } catch (err) {
+          logImpression('json_state_parse_error', 'app_load', err);
+          return {};
+        }
+
+        return parsedState || {};
+      }
+
+      function isUrlParamKeyPresent(name) {
+        name = name.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]');
+        var regex = new RegExp('[\\?&]' + name),
+          results = regex.exec(location.search);
+        return results !== null;
+      }
+
+      function getUrlParam(name) {
+        name = name.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
+          results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+      }
+
+      function onGapiLoadError(msg, url, lineNo, columnNo, error) {
+        logImpression('gapi_load_error', 'app_load', (msg || '') + ' ' + error);
+      }
+
+      function onMainAppScriptLoadError(msg, url, lineNo, columnNo, error) {
+        logImpression('main_app_script_load_error', 'app_load', (msg || '') + ' ' + error);
+      }
+
+      function gtagManagerLoadError(msg, url, lineNo, columnNo, error) {
+        logImpression('gtag_manager_load_error', 'app_load', (msg || '') + ' ' + error);
+      }
+
+      function onAdsScriptLoadError(msg, url, lineNo, columnNo, error) {
+        logImpression('ads_script_load_error', 'app_load', (msg || '') + ' ' + error);
+      }
+
+      function onGapiInit() {
+        // Trying setTimeout workaround to handle non-initialized gapi.auth2
+        execLater(function() {
+            logImpression('gapi_auth2_load_start', 'app_load');
+            gapi.load('auth2', initiateFirstAuth);
+          }, undefined, 1);
+      }
+
+      function initiateFirstAuth() {
+        logImpression('gapi_loaded', 'app_load');
+        authorize(
+            true /* isInvokedByApp */,
+            bindFn(handleFirstAuthSuccess, window),
+            bindFn(handleFirstAuthError, window),
+            getStateUserId(),
+            undefined /* opt_authUser */,
+            false /* opt_forceAccountChooser */,
+            'initiateFirstAuth');
+      }
+
+      function handleFirstAuthSuccess() {
+        logImpression('first_auth_success', 'auth');
+
+        firstAuthIsPending = false;
+        firstAuthSuccessful = true;
+
+        if (htmlBodyLoaded && MAINAPP) {
+          MAINAPP.handleFirstAuthSuccess();
+        }
+      }
+
+      function handleFirstAuthError(error, error_subtype) {
+        var errorDetails = error || '';
+        if (error_subtype) {
+          errorDetails += ( ' (' + error_subtype + ')');
+        }
+
+        firstAuthIsPending = false;
+        firstAuthSuccessful = false;
+
+        if (htmlBodyLoaded && MAINAPP) {
+          MAINAPP.handleFirstAuthError();
+        } else {
+          // Rely elsewhere to pick up state and resume, near where initAfterHtmlReady() is called.
+        }
+      }
+
+
+      function authorize(isInvokedByApp, successCallbackFn, errorCallbackFn, opt_userId, opt_authUser, opt_forceAccountChooser, opt_callingSource) {
+        logImpression('authorize', 'auth', 'immediate=' + isInvokedByApp + '; callingSource: ' + opt_callingSource);
+
+        var gapiAuthReady = (('gapi' in window) && gapi.auth2 && gapi.auth2.authorize);
+        if (!gapiAuthReady) {
+          logImpression('gapi_auth_not_ready', 'auth', 'immediate=' + isInvokedByApp + '; callingSource: ' + opt_callingSource);
+          errorCallbackFn('Error: GAPI Auth not initialized. callingSource: ' + opt_callingSource);
+          return;
+        }
+
+        // For popup auth, if there is an active window that's not closed, bring it to the foreground.
+        if (!isInvokedByApp) {
+          var lastAuthWindowObj = restoreLastAuthWindow();
+          if (lastAuthWindowObj) {
+            // Non-closed auth window has been restored and focused.
+            // No need for further auth.
+            return;
+          }
+        }
+
+        // TODO: Handle the case where GAPI did not load.
+        var authParams = {
+          'client_id': APP_CONFIG.clientId,
+          'scope': APP_CONFIG.scopes,
+          'response_type': 'token id_token',
+        };
+
+        // Add in prompt only for specific cases.
+        if (isInvokedByApp) {
+          authParams['prompt'] = 'none';
+        } else if (opt_forceAccountChooser) {
+          authParams['prompt'] = 'select_account';
+        } else {
+          // Don't force consent prompt to appear; it will appear if required.
+        }
+
+        if (opt_userId != null) {
+          authParams['login_hint'] = opt_userId;
+          authParams['authuser'] = -1;
+        } else {
+          if (!opt_forceAccountChooser) {
+            var authUser = (opt_authUser != null ? opt_authUser : CURRENT_AUTH_USER || 0);
+            authParams['authuser'] = authUser;
+          }
+        }
+
+        try {
+          gapi.auth2.authorize(authParams,
+              bindFn(handleGapiAuthResult, this, successCallbackFn, errorCallbackFn));
+        } catch (err) {
+          var authResult = {};
+          authResult.error = err;
+          handleGapiAuthResult(successCallbackFn, errorCallbackFn, authResult);
+        }
+      }
+
+      function handleGapiAuthResult(successCallbackFn, errorCallbackFn, authResult) {
+        if (authResult) {
+          if (authResult.error) {
+            var errorDetails = authResult.error + (authResult.error_subtype ? ' (' +  authResult.error_subtype + ')' : '');
+            if (authResult.details) {
+              errorDetails += ( ' [' + authResult.details + ']');
+            }
+            logImpression('auth_result', 'auth', 'error: ' + errorDetails);
+
+            if (errorCallbackFn) {
+              errorCallbackFn(authResult.error, errorDetails);
+            }
+          } else {
+            // Successful authorization.
+            updateAuthDetailsFromAuthResponse(authResult);
+
+            logImpression('auth_result', 'auth', 'success. authUser: ' + CURRENT_AUTH_USER);
+
+            if (successCallbackFn) {
+              successCallbackFn();
+            }
+          }
+        } else {
+          logImpression('auth_result', 'auth', '(empty authResult)');
+          // No Auth Result.
+          if (errorCallbackFn) {
+            errorCallbackFn(undefined /* authResult */);
+          } else {
+            alert('Auth Required. Please reload the page.');
+          }
+        }
+      }
+
+      function bindFn(fn, selfObj, var_args) {
+        return fn.call.apply(fn.bind, arguments);
+      }
+
+      function getLoggedInUserId() {
+        return CLAIM ? CLAIM['sub'] : null;
+      }
+
+      function updateAuthDetailsFromAuthResponse(authResult) {
+        ID_TOKEN = authResult.id_token;
+        ACCESS_TOKEN = authResult.access_token;
+        if (ID_TOKEN) {
+          CLAIM = parseJwtIdToken(ID_TOKEN);
+        }
+
+        var authUserIndex = 0;
+        if (authResult.session_state && authResult.session_state.extraQueryParams) {
+          var params = authResult.session_state.extraQueryParams;
+          if (params.authuser != null) {
+            authUserIndex = params.authuser;
+          }
+        }
+        CURRENT_AUTH_USER = authUserIndex;
+      }
+
+      function getUserEmail() {
+        return CLAIM ? CLAIM['email'] : null;
+      }
+
+      function getUserFullName() {
+        return CLAIM ? CLAIM['name'] : null;
+      }
+
+      function getUserGivenName() {
+        return CLAIM ? CLAIM['given_name'] : null;
+      }
+
+      function getUserPicture() {
+        return CLAIM ? CLAIM['picture'] : null;
+      }
+
+      function getUserDomain() {
+        return CLAIM ? CLAIM['hd'] : null;
+      }
+
+      function getAccessToken() {
+        return ACCESS_TOKEN;
+      }
+
+      function isTokenExpired() {
+        if (CLAIM && CLAIM.exp != null) {
+          return Math.round(new Date().getTime() / 1000) > CLAIM.exp;
+        } else {
+          // Token/Claim not present or exp not specified, spec is to return false.
+          return false;
+        }
+      }
+
+      function parseJwtIdToken(idToken) {
+        if (!idToken) {
+          return {};
+        }
+
+        var parsedToken = null;
+        try {
+          var base64Url = idToken.split('.')[1];
+          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          var tokenData = decodeURIComponent(window.atob(base64));
+          parsedToken = JSON.parse(tokenData);
+        } catch (err) {
+          logImpression('id_token_parse_error', 'app_load', err);
+          return {};
+        }
+
+        return parsedToken || {};
+      }
+
+      function isAuthorized() {
+        return !!CLAIM;
+      }
+
+      function isFirstAuthPending() {
+        return firstAuthIsPending;
+      }
+
+
+      function updateButtonTextHelper(id, newText, opt_newIcon) {
+        var btn = document.getElementById(id);
+        if (btn) {
+          if (btn.childNodes[2]) {
+            btn.childNodes[2].textContent = newText;
+          }
+          if (opt_newIcon) {
+            btn.children[0].textContent = opt_newIcon;
+          }
+        }
+      }
+
+      function updateUiForDevice() {
+        try {
+          var deviceType = detectDevice();
+
+          if (deviceType == 'phone' || deviceType == 'device') {
+              // Phone and TAblet.
+              updateButtonTextHelper('openZipFromDriveButton', 'Open ZIP From Drive');
+              updateButtonTextHelper('createNewZipButton', 'New ZIP');
+              updateButtonTextHelper('saveZipToDriveButton', 'Save to Drive');
+              updateButtonTextHelper('openZipInDriveButton', 'Open ZIP');
+              updateButtonTextHelper('fixEncodingButton', 'Encoding');
+
+            if (deviceType == 'device') {
+              // TABLET ONLY Overrides
+
+              // updateButtonTextHelper('encryptionPrompt', 'Use strong encryption');
+                // TODO: Change other buttons, such as preview save to drive / open in drive.
+            } else if (deviceType == 'phone') {
+              // PHONE ONLY Overrides
+              updateButtonTextHelper('openZipFromComputerButton', 'Open ZIP From Phone', 'smartphone')
+              updateButtonTextHelper('editZipButton', 'Edit');
+            }
+
+            // Phone and Tablet overrides.
+
+            // Even smaller 'Save' button.
+            updateButtonTextHelper('saveZipToDriveButton', 'Save');
+
+            // These are now just icons on mobile through hide-on-mobile-style
+            /*
+            updateButtonTextHelper('downloadZipButton', 'Download');
+            updateButtonTextHelper('addFilesFromComputerButton', 'Add Files...');
+            updateButtonTextHelper('addPasswordButton', 'Add Password...');
+            */
+
+          }
+        } catch (err) {
+          logImpression('update_ui_for_device_err', 'app_load', err);
+        }
+      }
+
+      function detectDevice() {
+        if (window.matchMedia("only screen and (max-width: 639px)").matches) {
+          return 'phone';
+        } else if (window.matchMedia("only screen and (max-width: 782px)").matches) {
+          return 'device';
+        } else {
+          return 'computer';
+        }
+      }
+
+      function rarDecodeOnLoadedCb() {
+      }
+
+      // This is used by libunrar.js to load libunrar.js.mem
+      var unrarMemoryFileLocation = 'anystring';
+      var g_on_loaded_cb = rarDecodeOnLoadedCb;
+
+      function handleDomLoadedEvents() {
+        if (!document) {
+          // OK To return, prerender will be called after HTML body load as a fallback
+          return;
+        }
+
+        if (document && document.readyState !== 'loading' ) {
+          updateUiAfterDomReady();
+        } else {
+          document.addEventListener('DOMContentLoaded', function() {
+            updateUiAfterDomReady();
+          });
+        }
+      }
+
+      var authWindowList = [];
+      var authWindowMap = {};
+      function restoreLastAuthWindow() {
+        var lastWin = authWindowMap['last'];
+        if (lastWin && !lastWin.closed) {
+          lastWin.focus();
+          return lastWin;
+        }
+
+        // Window not found.
+        return null;
+      }
+
+      window.onerror = function(message, source, lineno, colno, error) {
+        try {
+          var errorStackDetails = (error && error.stack) ? error.stack : '';
+          var errDetails = '(' + ze.VERSION + ') - ' + source + ' @ (' + lineno + ', ' + colno + '): ' + errorStackDetails;
+          window.console.log('Unhandled ZIP Extractor App Error -' + message + ': ' + errorStackDetails);
+          logImpression(message, 'unhandled_js_error', errDetails, undefined, undefined, true /* opt_sendAsBeacon */);
+        } catch (err) {
+          window.console.log('*** Unhandled App Error: ' + message + ' - ' + err);
+        }
+      };
+
+      // As the last action here before the async script loads, check for DOM loaded.
+      handleDomLoadedEvents();
+
+    </script>
+
+    <script async="" onerror="onGapiLoadError();" src="./DigiCon-master.zip - ZIP Extractor_files/api.js.download" gapi_processed="true"></script>
+    <script async="" onerror="onMainAppScriptLoadError();" onload="onMainAppScriptLoaded();" src="./DigiCon-master.zip - ZIP Extractor_files/app-min-3-67.js.download"></script>
+    <script async="" onerror="onAdsScriptLoadError();" src="./DigiCon-master.zip - ZIP Extractor_files/f(7).txt"></script>
+    <script async="" onerror="gtagManagerLoadError();" onload="gtagManagerLoaded()" src="./DigiCon-master.zip - ZIP Extractor_files/js"></script>
+  <link rel="preload" href="./DigiCon-master.zip - ZIP Extractor_files/f(8).txt" as="script"><script type="text/javascript" src="./DigiCon-master.zip - ZIP Extractor_files/f(8).txt"></script><link rel="preload" href="./DigiCon-master.zip - ZIP Extractor_files/f(9).txt" as="script"><script type="text/javascript" src="./DigiCon-master.zip - ZIP Extractor_files/f(9).txt"></script><link rel="stylesheet" type="text/css" href="./DigiCon-master.zip - ZIP Extractor_files/prettify.css"></head>
+
+  <body onload="onHtmlBodyLoaded()">
+
+    <!-- HEADER -->
+    <div id="header">
+      <div id="headerInfo">
+        <div id="headerSubInfo">
+          <div id="headerIcon">
+            <img id="headerIconImg" src="./DigiCon-master.zip - ZIP Extractor_files/zip.jpg" alt="ZIP Extractor">
+          </div>
+
+          <div id="mainAppTitle">ZIP Extractor</div>
+
+          <h1 id="mainAppSubTitle" class="mainAppSubtitle hideOnMobileOrDisplayBlock">
+            Free app for opening ZIP files
+          </h1>
+
+        </div> <!-- ENDS HEADER SUBINFO-->
+
+        <div id="profileImageDiv">
+          <div id="profileName" title="MANIDEEPU REDDY (manideepureddy9999@gmail.com)">MANIDEEPU</div>
+          <img id="profileImageImg" src="./DigiCon-master.zip - ZIP Extractor_files/photo.jpg" alt="Google Account" title="Switch Google Account">
+        </div>
+      </div> <!-- ENDS HEADER INFO -->
+    </div> <!-- ENDS HEADER -->
+
+    <div id="centeredBodyContent">
+      <div id="mainWrapper">
+        <div id="appContent">
+          <div id="mainApp">
+            <div id="adHeading">
+              ADVERTISEMENT
+            </div>
+
+            <div id="topBanner" class="topBanner">
+              <ins class="adsbygoogle topBannerIns" data-ad-client="ca-pub-6406277318721692" data-ad-slot="7504760783" data-adsbygoogle-status="done" style="width: 1504px; height: 90px;"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:1504px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:1504px;background-color:transparent;"><iframe width="1504" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0px;width:1504px;height:90px;" src="./DigiCon-master.zip - ZIP Extractor_files/saved_resource(1).html"></iframe></ins></ins></ins>
+              <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
+
+            <div id="preview" class="cardShadow" style="display: none;">
+              <div id="previewHeader">
+                <div id="previewTopBar">
+                  <div id="previewItemInfoContainer">
+                    <div id="previewItemIcon">
+                      <i id="previewItemIconImg" class="material-icons previewItemIconImg">add</i>
+                    </div>
+                    <svg id="previewSpinner" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                      <circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                    </svg>
+                    <div id="previewItemFilename">
+                    </div>
+                    <div id="previewItemSize">
+                    </div>
+                  </div> <!-- ENDS PreviewItemInfoContainer-->
+
+                  <div id="previewToolbar">
+                  </div> <!-- ENDS Preview Toolbar -->
+
+                  <div id="previewNavBar">
+                    <button id="previewPrevButton" tabindex="0" class="ze-button ze-icon-button previewNavButton" aria-label="Previous File" style="display: none;" title="Preview file">
+                      <i class="material-icons ze-icon-button-icon ze-icon-button-icon-large">skip_previous</i>
+                    </button>
+                    <button id="previewNextButton" tabindex="0" class="ze-button ze-icon-button previewNavButton previewButtonSpace" aria-label="Next File" style="display: none;" title="Next file">
+                      <i class="material-icons ze-icon-button-icon ze-icon-button-icon-large">skip_next</i>
+                    </button>
+                    <button id="previewCloseButton" tabindex="0" class="ze-button ze-icon-button previewNavButton" aria-label="Close" title="Close preview">
+                      <i class="material-icons ze-icon-button-icon ze-icon-button-icon-large">close</i>
+                    </button>
+                  </div> <!-- ENDS Preview Nav Bar -->
+                </div> <!-- ENDS Preivew Top Bar -->
+
+                <div id="previewHeaderInfo">
+
+                  <div id="previewZipFilenameAndStatus">
+                  </div>
+
+                  <div id="previewOpenWithButtonContainer">
+
+                    <button id="previewSaveToDriveButton" tabindex="0" class="ze-button ze-button--raised--colored ze-button-left primaryButton" aria-label="Save to Drive" style="display: none;">
+                      <svg class="material-icons ze-button-icon previewSaveToDriveButtonIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false">
+                        <path d="M7.71 3.52L1.15 15l3.42 5.99 6.56-11.47-3.42-6zM13.35 15H9.73L6.3 21h8.24c-.96-1.06-1.54-2.46-1.54-4 0-.7.13-1.37.35-2zM20 16v-3h-2v3h-3v2h3v3h2v-3h3v-2h-3zm.71-4.75L15.42 2H8.58v.01l6.15 10.77C15.82 11.68 17.33 11 19 11c.59 0 1.17.09 1.71.25z" fill="currentColor">
+                        </path>
+                      </svg>
+                      <span class="hideOnMobileOrDisplayInline">Save to Drive</span>
+                    </button>
+                    <button id="previewOpenInDriveButton" tabindex="0" class="ze-button ze-button--raised--colored ze-button-left primaryButton" aria-label="Open in Drive" style="display: none;">
+                      <svg class="material-icons ze-button-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                          <path d="M7.71 3.519L1.15 14.998l3.426 5.993 6.559-11.466m-1.403 5.473l-3.432 6h13.119l3.429-6m-.572-1l-6.857-12h-6.84l-.004.008 6.853 11.992h6.848z" fill="currentColor"></path>
+                      </svg>
+                      <span class="hideOnMobileOrDisplayInline">Open in Drive</span>
+                    </button>
+
+                    <button id="previewDownloadButton" tabindex="0" class="ze-button ze-button--raised--colored ze-button-left primaryButton" aria-label="Download" style="display: none;">
+                      <i class="material-icons ze-button-icon">save_alt</i>
+                      <span class="hideOnMobileOrDisplayInline">Download</span>
+                    </button>
+
+                    <button id="previewCancelButton" class="ze-button ze-button--colored cancelButton" style="display: none;">
+                      <i class="material-icons ze-button-icon" aria-hidden="true">cancel</i>
+                      Cancel
+                    </button>
+                  </div>
+
+                </div> <!-- ENDS Preview Header Info-->
+
+                <div id="previewProgressBarContainer">
+                  <div id="previewProgressBar" class="linear-progress previewProgressBar">
+                    <div class="linear-progressbar linear-progress-bar bar1" style="width: 100%;"></div>
+                  </div>
+                </div>
+              </div> <!-- Ends Preview Header-->
+
+              <div id="previewContent">
+                <div id="previewImageContent" style="display: none;">
+                  <img id="previewImg" src="./DigiCon-master.zip - ZIP Extractor_files/cleardot.gif" alt="ZIP File Preview Image">
+                </div>
+
+                <div id="previewAudioContent" style="display: none;">
+                  <audio id="previewAud" controls="controls" preload="auto" autoplay="autoplay">
+                  </audio>
+                </div>
+
+                <div id="previewTextContent" style="display: none;">
+                  <pre id="previewTxt" class="prettyprint"></pre>
+                </div>
+
+                <div id="previewGenericContent" class="previewCenteredContent" style="display: none;">
+                  <div id="previewGen" class="previewCenteredSubContent">
+                    <div id="noPreviewInfo">
+                      <i id="noPreviewIcon" class="material-icons noPreviewIcon">insert_drive_file</i>
+                      No preview available
+                    </div>
+                    <div id="noPreviewDetails">
+                      <p>Download this file by clicking the <span style="font-weight: 500;">Download</span> button above
+                      </p><p>You can then open it on your computer
+                    </p></div>
+                  </div>
+                </div>
+
+                <div id="previewErrorContent" class="previewCenteredContent" style="display: none;">
+                  <div id="previewErr" class="previewCenteredSubContent">
+                    <i class="material-icons previewErrorIcon">warning</i>
+                    <div id="previewErrorInfo">
+                      Oops! ZIP Extractor couldn't preview this file
+                    </div>
+                    <div id="previewErrorCaption">
+                    </div>
+                    <div id="previewErrorDetails">
+                    </div>
+                  </div>
+                </div>
+
+                <div id="previewPdfContent" style="display: none;">
+                  <embed id="previewPdf" type="application/pdf">
+                </div>
+
+                <div id="previewVideoContent" style="display: none;">
+                  <video id="previewVid" controls="controls" autoplay="autoplay">
+                  </video>
+                </div>
+
+                <div id="previewDriveContent" class="previewCenteredContent" style="display: none;">
+
+                  <div id="previewDriveSaveToDriveFirst" class="previewCenteredSubContent" style="display: none;">
+                    <img class="material-icons previewInfoIcon previewInfoIconDrive" src="./DigiCon-master.zip - ZIP Extractor_files/drive-128.jpg" alt="Google Drive">
+
+                    <div id="previewSaveToDriveInfo">
+                      This file can be viewed in Google Drive
+                    </div>
+                    <div id="previewSaveToDriveCaption">
+                      To view this item, save it to Google Drive using the <span style="font-weight: 500;">Save to Drive</span> button above.
+                    </div>
+                    <div id="previewSaveToDriveDetails" style="display: none;">
+                      In order to Save to Drive, an authorization popup will appear requiring your approval.
+                    </div>
+                  </div>
+                </div>
+              </div> <!-- ENDS PREVIEW CONTENT-->
+            </div> <!-- ENDS PREVIEW -->
+
+            <div id="zipTable" class="cardShadow" style="">
+              <div id="mainAppHeader" style="">
+                <div id="mainAppHeaderContent">
+                  <div id="mainLabelContainer">
+                    <i id="mainIcon" class="material-icons mainIcon" aria-hidden="true" style="color: rgb(26, 115, 232);">check_circle</i>
+                    <svg id="mainSpinner" class="spinner mainSpinner" width="20px" height="20px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                      <circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                    </svg>
+                    <div id="mainLabel" style="color: rgb(26, 115, 232);">Extraction complete</div>
+
+                    <div id="buttonContainer">
+                      <button id="fixEncodingButton" class="ze-button ze-button--colored" aria-label="Fix Encoding" style="display: none;">
+                        <i class="material-icons ze-button-icon-large ze-button-icon-elevated">font_download</i>
+                        Fix Encoding
+                      </button>
+
+                      <button id="editZipButton" class="ze-button ze-button--colored" aria-label="Edit ZIP File" style="display: none;">
+                        <i class="material-icons ze-button-icon-large ze-button-icon-elevated">edit</i>
+                        Edit ZIP File
+                      </button>
+
+                      <button id="doneEditingZipButton" class="ze-button ze-button--colored doneEditingZipButton" aria-label="Done Editing ZIP File" style="display: none;">
+                        Done
+                        <i class="material-icons ze-button-icon-large ze-button-icon-elevated doneEditingZipButtonIcon">check</i>
+                      </button>
+
+                      <button id="closeButton" class="ze-button ze-icon-button closeButton" aria-label="Close" style="">
+                        <i class="material-icons ze-icon-button-icon ze-icon-button-icon-large">clear</i>
+                      </button>
+                    </div> <!-- ENDS BUTTON CONTAINER -->
+                  </div> <!-- ENDS MAIN LABEL CONTAINER -->
+
+                  <div id="secondaryLabelContainer">
+                    <div id="secondaryLabelLinkCombo">
+                      <div id="secondaryLabel">42 files extracted</div>
+                      <div id="secondaryLabelLink" style="display: none;"></div>
+                    </div>
+
+                    <div id="zipPasswordInputContainer" style="display: none;">
+                      <i class="material-icons zipPasswordCaptionIcon">vpn_key</i>
+                      <input id="zipPasswordInput" type="password" placeholder="Password" autocomplete="new-password">
+
+                      <button id="showZipPasswordButton" tabindex="0" class="ze-button ze-icon-button showHideZipPasswordButton" aria-label="Show password" title="Show password">
+                        <i class="material-icons ze-icon-button-icon ze-icon-button-icon-large">visibility</i>
+                      </button>
+                      <button id="hideZipPasswordButton" tabindex="0" class="ze-button ze-icon-button showHideZipPasswordButton" aria-label="Hide password" style="display: none;" title="Hide password">
+                        <i class="material-icons ze-icon-button-icon ze-icon-button-icon-large">visibility_off</i>
+                      </button>
+
+                      <button id="checkPasswordButton" class="ze-button ze-button--raised--colored ze-button-left primaryButton" style="display: none;">
+                        <i class="material-icons ze-button-icon" aria-hidden="true">lock_open</i>
+                        Check Password
+                      </button>
+
+                      <button id="setPasswordButton" class="ze-button ze-button--raised--colored ze-button-left primaryButton" style="display: none;">
+                        <i class="material-icons ze-button-icon" aria-hidden="true">lock</i>
+                        Set Password
+                      </button>
+
+                      <div id="encryptionPrompt" class="hideOnMobileOrDisplayBlock" style="display: none;">
+                        <button id="encryptionPromptCheckbox" class="ze-button ze-button--colored ze-icon-button encryptionPromptCheckbox">
+                          <i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box_outline_blank</i>
+                        </button>
+                        Use strong encryption (requires ZIP Extractor or WinZip to open)
+                      </div>
+                    </div>
+
+                    <div id="addFilesButtonContainer" style="display: none;">
+                      <button id="addFilesFromComputerButton" class="ze-button ze-button--raised--colored primaryButton">
+                        <i class="material-icons ze-button-icon" aria-hidden="true">add_circle_outline</i>
+                        <span class="hideOnMobileOrDisplayInline">Add Files to ZIP...</span>
+                      </button>
+
+                      <button id="addFilesFromGoogleDriveButton" class="ze-button ze-button--raised--colored ze-button-left primaryButton" style="display: none;">
+                        <svg class="material-icons ze-button-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                            <path d="M7.71 3.519L1.15 14.998l3.426 5.993 6.559-11.466m-1.403 5.473l-3.432 6h13.119l3.429-6m-.572-1l-6.857-12h-6.84l-.004.008 6.853 11.992h6.848z" fill="currentColor"></path>
+                        </svg>
+                        <span class="hideOnMobileOrDisplayInline">Add Files from Google Drive...</span>
+                      </button>
+
+                      <button id="addPasswordButton" class="ze-button ze-button--raised--colored ze-button-left primaryButton" style="display: none;">
+                        <i class="material-icons ze-button-icon" aria-hidden="true">enhanced_encryption</i>
+                        <span class="hideOnMobileOrDisplayInline">Add Password to ZIP...</span>
+                      </button>
+                    </div>
+
+                    <button id="retryButton" class="ze-button ze-button--raised retryButton" style="display: none;">
+                      <i class="material-icons ze-button-icon" aria-hidden="true">refresh</i>
+                      Retry
+                    </button>
+
+                    <button id="cancelButton" class="ze-button ze-button--colored cancelButton" style="display: none;">
+                      <i class="material-icons ze-button-icon" aria-hidden="true">cancel</i>
+                      Cancel
+                    </button>
+
+                    <button id="extractButton" class="ze-button ze-button--raised--colored ze-button-left primaryButton" style="display: none;">
+                      <svg class="material-icons ze-button-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" focusable="false" fill="currentColor">
+                        <path d="M7.71 3.52L1.15 15l3.42 5.99 6.56-11.47-3.42-6zM13.35 15H9.73L6.3 21h8.24c-.96-1.06-1.54-2.46-1.54-4 0-.7.13-1.37.35-2zM20 16v-3h-2v3h-3v2h3v3h2v-3h3v-2h-3zm.71-4.75L15.42 2H8.58v.01l6.15 10.77C15.82 11.68 17.33 11 19 11c.59 0 1.17.09 1.71.25z">
+                        </path>
+                      </svg>
+                      Extract
+                    </button>
+
+                    <button id="viewFilesButton" class="ze-button ze-button--raised--colored ze-button-right primaryButton" style="">
+                      <svg class="material-icons ze-button-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                          <path d="M7.71 3.519L1.15 14.998l3.426 5.993 6.559-11.466m-1.403 5.473l-3.432 6h13.119l3.429-6m-.572-1l-6.857-12h-6.84l-.004.008 6.853 11.992h6.848z" fill="currentColor"></path>
+                      </svg>
+                      View Files
+                    </button>
+
+                    <button id="saveZipToDriveButton" class="ze-button ze-button--raised--colored ze-button-left primaryButton" style="display: none;">
+                      <svg class="material-icons ze-button-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" focusable="false" fill="currentColor">
+                        <path d="M7.71 3.52L1.15 15l3.42 5.99 6.56-11.47-3.42-6zM13.35 15H9.73L6.3 21h8.24c-.96-1.06-1.54-2.46-1.54-4 0-.7.13-1.37.35-2zM20 16v-3h-2v3h-3v2h3v3h2v-3h3v-2h-3zm.71-4.75L15.42 2H8.58v.01l6.15 10.77C15.82 11.68 17.33 11 19 11c.59 0 1.17.09 1.71.25z">
+                        </path>
+                      </svg>
+                      Save ZIP to Drive
+                    </button>
+
+                    <button id="openZipInDriveButton" tabindex="0" class="ze-button ze-button--raised--colored ze-button-left primaryButton" aria-label="Open in Drive" style="display: none;">
+                      <svg class="material-icons ze-button-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                          <path d="M7.71 3.519L1.15 14.998l3.426 5.993 6.559-11.466m-1.403 5.473l-3.432 6h13.119l3.429-6m-.572-1l-6.857-12h-6.84l-.004.008 6.853 11.992h6.848z" fill="currentColor"></path>
+                      </svg>
+                      View ZIP in Drive
+                    </button>
+
+                    <button id="downloadZipButton" class="ze-button ze-button--raised--colored ze-button-left primaryButton" style="display: none;">
+                      <i class="material-icons ze-button-icon" aria-hidden="true">save_alt</i>
+                      <span class="hideOnMobileOrDisplayInline">Download ZIP</span>
+                    </button>
+
+                  </div> <!-- ENDS Secondary Label Container -->
+
+                  <div id="progressBarContainer">
+                    <div id="mainProgressBar" class="linear-progress mainProgressBar">
+                      <div class="linear-progressbar linear-progress-bar bar1" style="width: 100%;"></div>
+                    </div>
+                  </div>
+                </div> <!-- ENDS MAIN APP HEADER CONTENT -->
+              </div> <!-- ENDS MAIN APP HEADER -->
+
+              <div id="fileTableContainer" style="">
+                <div id="fileTableHeader">
+                  <div id="zipFilenameInputContainer" style="display: none;">
+                    <input id="zipFilenameInput" placeholder="ZIP Filename">
+                  </div>
+
+                  <div id="fileTableHeaderLabel">DigiCon-master.zip</div>
+
+                  <div id="fileTableHeaderSize">35.7 MB</div>
+
+                  <div id="rootStatus">
+                    <div id="rootStatusIconContainer" style="">
+                      <i id="rootStatusIcon" class="material-icons">cloud_done</i>
+                    </div>
+
+                    <svg id="rootStatusSpinner" class="spinner" width="18px" height="18px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                      <circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                    </svg>
+
+                    <button id="selectAllCheckbox" class="ze-button ze-button--colored ze-icon-button selectAllCheckbox" style="display: none;">
+                      <i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i>
+                    </button>
+                  </div> <!-- ENDS ROOT STATUS CELL -->
+                </div> <!-- ENDS FILE TABLE HEADER-->
+
+                <div id="fileTableSubHeader" style="display: none;"></div>
+
+                <div id="fileTableItems">
+                <div class="zipTableRow directoryRow"><div class="zipTableCell filenameCell directoryCell" style="padding-left: 0px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">folder</i><div class="tableRowName" style="color: rgb(26, 115, 232);">DigiCon-master</div></div><div class="zipTableCell sizeCell"></div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow directoryRow"><div class="zipTableCell filenameCell directoryCell" style="padding-left: 24px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">folder</i><div class="tableRowName" style="color: rgb(26, 115, 232);">__pycache__</div></div><div class="zipTableCell sizeCell"></div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">insert_drive_file</i><div class="tableRowName" style="color: rgb(26, 115, 232);">trainer.cpython-37.pyc</div></div><div class="zipTableCell sizeCell">11 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow directoryRow"><div class="zipTableCell filenameCell directoryCell" style="padding-left: 24px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">folder</i><div class="tableRowName" style="color: rgb(26, 115, 232);">autocorrect</div></div><div class="zipTableCell sizeCell"></div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">__init__.py</div></div><div class="zipTableCell sizeCell">6 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">_utils.py</div></div><div class="zipTableCell sizeCell">2 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">autocorrect.py</div></div><div class="zipTableCell sizeCell">5 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">error_correction.py</div></div><div class="zipTableCell sizeCell">3 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">description</i><div class="tableRowName" style="color: rgb(26, 115, 232);">EssentialCorpus.txt</div></div><div class="zipTableCell sizeCell">6 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">nlp_parser.py</div></div><div class="zipTableCell sizeCell">501 B</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">test.py</div></div><div class="zipTableCell sizeCell">107 B</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">word.py</div></div><div class="zipTableCell sizeCell">4 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">word_lists.py</div></div><div class="zipTableCell sizeCell">2 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">insert_drive_file</i><div class="tableRowName" style="color: rgb(26, 115, 232);">words</div></div><div class="zipTableCell sizeCell">33.6 MB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">business_center</i><div class="tableRowName" style="color: rgb(26, 115, 232);">words.bz2</div></div><div class="zipTableCell sizeCell">10.2 MB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">business_center</i><div class="tableRowName" style="color: rgb(26, 115, 232);">words1.bz2</div></div><div class="zipTableCell sizeCell">10.2 MB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow directoryRow"><div class="zipTableCell filenameCell directoryCell" style="padding-left: 24px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">folder</i><div class="tableRowName" style="color: rgb(26, 115, 232);">classifier</div></div><div class="zipTableCell sizeCell"></div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">insert_drive_file</i><div class="tableRowName" style="color: rgb(26, 115, 232);">classifier.bin</div></div><div class="zipTableCell sizeCell">5.9 MB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">classifier.py</div></div><div class="zipTableCell sizeCell">3 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">business_center</i><div class="tableRowName" style="color: rgb(26, 115, 232);">fetr1.txt.gz</div></div><div class="zipTableCell sizeCell">2.7 MB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">description</i><div class="tableRowName" style="color: rgb(26, 115, 232);">readme.txt</div></div><div class="zipTableCell sizeCell">95 B</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 24px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">main.py</div></div><div class="zipTableCell sizeCell">2 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow directoryRow"><div class="zipTableCell filenameCell directoryCell" style="padding-left: 24px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">folder</i><div class="tableRowName" style="color: rgb(26, 115, 232);">pre_proc</div></div><div class="zipTableCell sizeCell"></div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">divide2.py</div></div><div class="zipTableCell sizeCell">1 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow directoryRow"><div class="zipTableCell filenameCell directoryCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">folder</i><div class="tableRowName" style="color: rgb(26, 115, 232);">output</div></div><div class="zipTableCell sizeCell"></div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 72px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">photo</i><div class="tableRowName" style="color: rgb(26, 115, 232);">0.png</div></div><div class="zipTableCell sizeCell">2 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">skew.py</div></div><div class="zipTableCell sizeCell">751 B</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 24px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">README.md</div></div><div class="zipTableCell sizeCell">5 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 24px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">description</i><div class="tableRowName" style="color: rgb(26, 115, 232);">requirements.txt</div></div><div class="zipTableCell sizeCell">44 B</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 24px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">insert_drive_file</i><div class="tableRowName" style="color: rgb(26, 115, 232);">requirements.txt~</div></div><div class="zipTableCell sizeCell">29 B</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 24px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">trainer.py</div></div><div class="zipTableCell sizeCell">12 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow directoryRow"><div class="zipTableCell filenameCell directoryCell" style="padding-left: 24px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">folder</i><div class="tableRowName" style="color: rgb(26, 115, 232);">utils</div></div><div class="zipTableCell sizeCell"></div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">__init__.py</div></div><div class="zipTableCell sizeCell">0 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow directoryRow"><div class="zipTableCell filenameCell directoryCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">folder</i><div class="tableRowName" style="color: rgb(26, 115, 232);">__pycache__</div></div><div class="zipTableCell sizeCell"></div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 72px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">insert_drive_file</i><div class="tableRowName" style="color: rgb(26, 115, 232);">__init__.cpython-37.pyc</div></div><div class="zipTableCell sizeCell">144 B</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 72px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">insert_drive_file</i><div class="tableRowName" style="color: rgb(26, 115, 232);">binary.cpython-37.pyc</div></div><div class="zipTableCell sizeCell">3 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">photo</i><div class="tableRowName" style="color: rgb(26, 115, 232);">2.jpeg</div></div><div class="zipTableCell sizeCell">216 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">binary.py</div></div><div class="zipTableCell sizeCell">3 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">call_binary.py</div></div><div class="zipTableCell sizeCell">623 B</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow directoryRow"><div class="zipTableCell filenameCell directoryCell" style="padding-left: 48px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">folder</i><div class="tableRowName" style="color: rgb(26, 115, 232);">utils</div></div><div class="zipTableCell sizeCell"></div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 72px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">__init__.py</div></div><div class="zipTableCell sizeCell">0 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div><div class="zipTableRow lastZipTableRow"><div class="zipTableCell filenameCell" style="padding-left: 72px;"><i class="material-icons tableRowIcon" tabindex="-1" style="color: rgb(26, 115, 232); opacity: 0.8;">code</i><div class="tableRowName" style="color: rgb(26, 115, 232);">binary.py</div></div><div class="zipTableCell sizeCell">3 KB</div><div class="zipTableCell statusCell"><div class="statusCellIcon" style=""><i class="material-icons zipStatusIcon" tabindex="0" title="Extracted to Google Drive">cloud_done</i></div><svg class="spinner zipStatusSpinner" width="18px" height="18px" viewBox="0 0 66 66" style="display: none;"><circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><button class="ze-button ze-icon-button ze-button--colored zipEntryCheckboxButton" style="display: none;"><i class="material-icons ze-icon-button-icon ze-checkbox-button">check_box</i></button></div></div></div> <!-- ENDS FILE TABLE ITEMS-->
+
+              </div> <!-- ENDS FILE TABLE CONTAINER -->
+            </div> <!-- ENDS ZIPTABLE -->
+
+            <!-- BEGIN Scrollable Start Page Content -->
+            <div id="mainScrollableContent" class="cardShadow" style="display: none;">
+
+              <!-- BEGIN Scrollable StartCard -->
+              <div id="startCard">
+                <div id="startPagePrompt" style="display: none;">
+
+                  <h2>Welcome to ZIP Extractor</h2>
+
+                  <div id="startPageText">
+                    <div id="startPageIcon">
+                      <img id="startPageIconImgDrive" class="startPageIconImg" src="./DigiCon-master.zip - ZIP Extractor_files/drive.jpg" alt="Google Drive" style="">
+                      <img id="startPageIconImgGmail" class="startPageIconImg" src="./DigiCon-master.zip - ZIP Extractor_files/gmail.jpg" alt="Gmail" style="display: none;">
+                      <img id="startPageIconImgGeneral" class="startPageIconImg" src="./DigiCon-master.zip - ZIP Extractor_files/zip.jpg" alt="ZIP Extractor" style="display: none;">
+                    </div>
+
+                    <div id="startPageDetailsContainer">
+                      <p>ZIP Extractor is a free app for opening ZIP files in Google Drive and Gmail and has over 15 million active users.
+
+                      <!-- BEGIN THREE OPTIONS FOR START PAGE -->
+
+                      <!-- GENERAL USER -->
+                      </p><div id="startPageGeneralDetails" class="startPageDetails" style="display: none;">
+                          <p id="secondaryIntroText">With ZIP Extractor you can open a ZIP file of your choice, and then unzip, view, and download the files inside.
+
+                          </p><p class="callToActionPara">To get started, open a ZIP file with one of the buttons below.
+                      </p></div>
+
+                      <!-- GMAIL USER -->
+                      <div id="startPageGmailDetails" class="startPageDetails" style="display: none;">
+                        <p>You've opened a Gmail attachment with ZIP Extractor. This will allow you to unzip the attachment and download the files inside.
+
+                        </p><p class="callToActionPara">To continue, authorize ZIP Extractor with the button below.
+                      </p></div>
+
+                      <!-- DRIVE USER -->
+                      <div id="startPageDriveDetails" class="startPageDetails">
+                        <p>You've opened a ZIP file in Google Drive with ZIP Extractor. This will allow you to unzip the file and download the files inside.
+
+                        </p><p class="callToActionPara">To continue, authorize ZIP Extractor with the button below.
+                      </p></div>
+
+                      <!-- ALL BUTTONS CONTAINER -->
+                      <div id="startButtonsContainer">
+
+                        <!-- GENERAL BUTTON CONTAINER -->
+                        <div id="generalButtonContainer" style="display: none;">
+
+                          <button id="openZipFromComputerButton" class="ze-button ze-button--raised--colored openButton openButtonLeft openButtonFirstLine">
+                            <i class="material-icons ze-button-icon-large" aria-hidden="true">computer</i>
+                            Open ZIP From Computer
+                          </button>
+
+                          <button id="openZipFromDriveButton" class="ze-button ze-button--raised--colored ze-button openButton openButtonLeft openButtonSecondLine">
+
+                            <svg class="material-icons ze-button-icon-large" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                <path d="M7.71 3.519L1.15 14.998l3.426 5.993 6.559-11.466m-1.403 5.473l-3.432 6h13.119l3.429-6m-.572-1l-6.857-12h-6.84l-.004.008 6.853 11.992h6.848z" fill="currentColor"></path>
+                            </svg>
+
+                            Open ZIP From Google Drive
+                          </button>
+
+                          <button id="createNewZipButton" class="ze-button ze-button--raised--colored openButton">
+                            <img class="material-icons ze-button-icon-large ze-button-icon-background ze-create-button-icon" src="./DigiCon-master.zip - ZIP Extractor_files/create_64.png" alt="Create New ZIP File">
+                            Create New ZIP
+                          </button>
+                        </div> <!-- ENDS GENERAL BUTTON CONTAINER -->
+
+                        <!-- AUTH BUTTON CONTAINER -->
+                        <div id="authButtonContainer" style="display: none;">
+                          <div id="checkingAuthSpinnerContainer">
+                            Loading...
+                            <svg id="checkingAuthSpinner" class="spinner checkingAuthSpinner" width="20px" height="20px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                              <circle class="spinnerSvgPath" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                            </svg>
+                          </div>
+
+                          <button id="authButton" class="ze-button ze-button--raised--colored" style="display: none;">
+                            <i class="material-icons ze-button-icon-large" aria-hidden="true">cloud_done</i>
+                            Authorize ZIP Extractor
+                          </button>
+                          <div id="authButtonDetails">
+                          </div>
+                        </div> <!-- ENDS AUTH BUTTON CONTAINER -->
+                      </div> <!-- ENDS ALL BUTTONS CONTAINER -->
+                    </div> <!-- ENDS startPageDetailsContainer-->
+                  </div> <!-- ENDS startPageText-->
+                </div> <!-- ENDS START PAGE PROMPT -->
+              </div> <!-- ENDS START CARD -->
+
+              <div id="textBlockHowToUse" class="textBlock">
+                <h2>How to use ZIP Extractor</h2>
+                <ol>
+                  <li>To begin, select a ZIP file to open from Gmail, Google Drive, or your computer.
+                  </li><li>Once displayed, click on any individual file inside the ZIP to view or download it.
+                  </li><li>Press the "Extract" button to extract the selected files to Google Drive.
+                  </li><li>A new folder will be created in Google Drive for the unzipped files ending with "(Unzipped Files)".
+                  </li><li>After extraction, click View Files to go to the unzipped files in Google Drive.
+                </li></ol>
+              </div>
+
+              <div id="textBlock0" class="textBlock">
+                <h2>How ZIP Extractor Works</h2>
+                <ul>
+                  <li>ZIP Extractor is a pure JavaScript web app. All extraction and decompression is done on your computer, directly in your web browser, and not on any server.
+                  </li><li>ZIP Extractor can open password-protected files.
+                      The password is only used on your computer to open the file and is never sent over the network.
+                  </li><li>ZIP Extractor supports ZIP, RAR, TAR, 7-Zip (*.7z), GZIP (*.gz), and BZIP (*.bz2) file formats.
+                </li></ul>
+              </div>
+
+              <div id="footer">
+                <div id="about">
+                  <div id="copyright">Copyright © 2020 ZIP Extractor™ v3.67</div>
+                  <div id="applinks">
+                    <a href="https://zipextractor.app/privacy.html" target="_blank">Privacy Policy</a> |
+                    <a href="https://zipextractor.app/terms.html" target="_blank">Terms</a> |
+                    <a href="https://zipextractor.app/contact.html" target="_blank">Contact</a>
+                  </div>
+                </div> <!-- ENDS ABOUT -->
+              </div> <!-- ENDS FOOTER -->
+
+              <input type="file" id="openLocalZipFileInputEl" accept=".zip,.zipx,.rar,.7z,.gz,.tar,.tgz,.bz2,.bz,.bzip,.bzip2,.tbz,.lzma,.tlz" style="display: none">
+              <input type="file" id="addLocalFileInputEl" multiple="" style="display: none">
+              <a id="downloadAnchorEl" href="https://zipextractor.app/" download="" style="display: none"></a>
+
+            </div> <!-- ENDS MAIN SCROLLABLE CONTENT -->
+          </div> <!-- ENDS MAIN APP-->
+
+        </div> <!-- ENDS APP CONTENT  -->
+      </div> <!-- ENDS MAIN -->
+    </div>
+  
+
+<ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><ins id="aswift_1_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><iframe frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0px;width:0px;height:0px;" src="./DigiCon-master.zip - ZIP Extractor_files/saved_resource(2).html"></iframe></ins></ins></ins><iframe id="ssIFrame_google" sandbox="allow-scripts allow-same-origin" aria-hidden="true" frame-border="0" src="./DigiCon-master.zip - ZIP Extractor_files/iframe.html" style="position: absolute; width: 1px; height: 1px; left: -9999px; top: -9999px; right: -9999px; bottom: -9999px; display: none;"></iframe><iframe id="google_osd_static_frame_6337977410082" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./DigiCon-master.zip - ZIP Extractor_files/saved_resource(3).html"></iframe></body><iframe id="google_esf" name="google_esf" src="./DigiCon-master.zip - ZIP Extractor_files/zrt_lookup.html" data-ad-client="ca-pub-6406277318721692" style="display: none;"></iframe></html>
