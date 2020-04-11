@@ -39,7 +39,11 @@ a software solution with a minimum hardware requirement.
 - Create an empty folder for result text files
 - In case input file is 'input' and output file is 'output'. Run the model as : 
 
-``` python main.py input output 
-```
+python main.py input output 
+
+### Output on Buffalo Dataset
+
+The [Buffalo Dataset](https://drive.google.com/drive/folders/1cm1fv4TMy-kGcvXK6AFjuAWkBDBDuv7A) contains 70 Handwritten Documents and the folder 'output' contians 70 analysed text files
+
 
 
